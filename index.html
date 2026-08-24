@@ -1,0 +1,95 @@
+students = [
+  {"name": "Robin", "maths": 70, "english": 40, "science": 50},
+  {"name": "Tintswalo", "maths": 35, "english": 69, "science": 38},
+  {"name": "Peggy", "maths": 54, "english": 87, "science": 92},
+  {"name": "James", "maths": 42, "english": 30, "science": 56},
+  {"name": "Kulani", "maths": 65, "english": 76, "science": 71}
+  ]  
+  
+
+results = [] # will hold: name, average, grade, staus
+
+# main for loop: calculate average + apply grade/status logic
+for student in students:
+    average = round((student["maths"] + student["english"] + student["science"]) / 3, 2)
+
+    # grade logic
+    if average >= 80:
+     grade = 'A'
+    elif average >= 70:
+     grade = 'B'
+    elif average >= 60:
+     grade = 'C'
+    elif average >= 50:
+     grade = 'D'
+    else:
+     grade = 'F'
+
+#assign pass/fail status
+    status = "Pass" if  average >= 50 else "fail"
+
+#build results list
+    results.append({
+      "name": student["name"],
+      "average": average,
+      "grade": grade,
+      "status": status
+
+    })
+
+#after loop calculate class stats
+averages = [r["average"] for r in results]
+class_average = round(sum(averages) / len(averages), 2)
+highest = max(averages)
+lowest = min(averages)
+
+#display formatted class report
+print("\n" + "="*50)
+print(f"{'CLASS REPORT':^50}")
+print("="*50)
+print(f"{'Name':<12} {'Average':<10} {'Grade':<8} {'Status':<10}")
+print("-"*50)
+
+for r in results:
+  print(f"{r['name']:<12} {r['average']:<10.2f} {r['grade']:<8} {r['status']:<10}")
+
+print("-"*50)
+print(f"CLASS AVERAGE: {class_average:.2f}")
+print(f"HIGHEST AVERAGE: {highest:.2f}")
+print(f"LOWEST AVERAGE: {lowest:.2f}")
+print("="*50)
+
+#while loop to search for a student by name
+
+while True:
+  search = input("\nSearch for a student by name (or type 'exit' to quit): ").strip().lower()
+
+  if search == "exit":
+    print("Exiting search. Goodbye!")
+    break
+
+  found = False
+  for r in results:
+    if r["name"].lower() == search:
+      print("\n--- Student Found ---")
+      print(f"Name : {r['name']}")
+      print(f"Average : {r['average']:.2f}")
+      print(f"Grade : {r['grade']}")
+      print(f"Status : {r['status']}")
+      found = True
+      break
+
+  if not found:
+    print("Student not found. Try again.")
+
+
+
+
+
+
+
+
+
+
+
+    
